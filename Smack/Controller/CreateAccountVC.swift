@@ -18,7 +18,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     //default variables
-    var avatarName = "profileDefault"
+    var avatarName = "smackProfileIcon"
     var avatarColor = "[0.5, 0.5, 0.5, 1]"
     var bgColor: UIColor?
     
@@ -85,20 +85,19 @@ class CreateAccountVC: UIViewController {
     }
     
     func setupView(){
+        spinner.isHidden = true
+        
         userNameTXT.attributedPlaceholder = NSAttributedString(string: "username", attributes: [NSAttributedStringKey.foregroundColor: SMACKPURPLEPLACEHOLDER])
         
         emailTxt.attributedPlaceholder = NSAttributedString(string: "email", attributes: [NSAttributedStringKey.foregroundColor: SMACKPURPLEPLACEHOLDER])
         
         passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: SMACKPURPLEPLACEHOLDER])
         
-        spinner.isHidden = true
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(CreateAccountVC.handleTap))
-        
         view.addGestureRecognizer(tap)
     }
     
-    @objc func handleTap(){
+    @objc func handleTap() {
         view.endEditing(true)
     }
 }
