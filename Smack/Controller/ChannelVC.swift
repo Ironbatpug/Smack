@@ -19,6 +19,14 @@ class ChannelVC: UIViewController {
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width-60
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+        
+        MessageService.instance.findAllChannel { (succes) in
+            print("pina")
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        setupUserInfo()
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -32,14 +40,17 @@ class ChannelVC: UIViewController {
     }
     
     @objc func userDataDidChange(_ notif: Notification) {
+        setupUserInfo()
+    }
+    
+    func setupUserInfo() {
         if AuthService.instance.isLoggedIn {
             loginBtn.setTitle(UserDataService.instance.name, for: .normal)
             print(UserDataService.instance.avatarName)
             userImage.image = UIImage(named: UserDataService.instance.avatarName)
             print(UserDataService.instance.avatarColor)
-
+            
             userImage.backgroundColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
-            print(userImage.backgroundColor)
         } else {
             loginBtn.setTitle("Login", for: .normal)
             userImage.image = UIImage(named: "menuProfileIcon")

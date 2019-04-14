@@ -82,14 +82,8 @@ class AuthService{
 //solution swiftyjson
                 guard let data = response.data else {return}
                 let json = JSON(data: data)
-                print("data: \(data)")
-                print("json: \(json)")
                 self.userEmail = json["user"].stringValue
                 self.authToken = json["token"].stringValue
-                print("token")
-                print(json["token"].stringValue)
-
-                print(self.authToken)
             
                 self.isLoggedIn = true
                 completion(true)
@@ -123,12 +117,7 @@ class AuthService{
     }
     
     func findUserByEmail(completion: @escaping CompletionHandler) {
-        print(BEARER_HEADER)
         Alamofire.request("\(URL_USER_BY_EMAIL)\(userEmail)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON { (response) in
-            print("pina")
-            print(response)
-            print("pina")
-
             if response.result.error == nil {
                 guard let data = response.data else { return }
                 self.setUserInfo(data: data)
