@@ -108,7 +108,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
             MessageService.instance.unreadMessage = MessageService.instance.unreadMessage.filter{$0 != channel.channelID}
         }
         let index = IndexPath(row: indexPath.row, section: 0)
-        tableView.reloadRows(at: index, with: .none)
+        tableView.reloadRows(at: [index], with: .none)
         tableView.selectRow(at: index, animated: false, scrollPosition: .none)
         
         NotificationCenter.default.post(name: NOTIF_CHANNEL_SELECTED, object: nil)
