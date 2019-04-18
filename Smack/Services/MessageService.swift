@@ -30,9 +30,7 @@ class MessageService {
 //                    debugPrint(error as Any)
 //                }
 //                print(self.channels)
-                
-                
-                
+
                 if let json = JSON(data: data).array{
                     for item in json {
                         let name = item["name"].stringValue
@@ -60,7 +58,7 @@ class MessageService {
                     for item in json {
                         let messageBody = item["messageBody"].stringValue
                         let channelId = item["channelId"].stringValue
-                        let id = item["_id"].stringValue
+                        let id = item["userId"].stringValue
                         let userName = item["userName"].stringValue
                         let userAvatar = item["userAvatar"].stringValue
                         let userAvatarColor = item["userAvatarColor"].stringValue

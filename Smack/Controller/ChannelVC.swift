@@ -54,10 +54,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     func setupUserInfo() {
         if AuthService.instance.isLoggedIn {
             loginBtn.setTitle(UserDataService.instance.name, for: .normal)
-            print(UserDataService.instance.avatarName)
-            userImage.image = UIImage(named: UserDataService.instance.avatarName)
-            print(UserDataService.instance.avatarColor)
-            
+            userImage.image = UIImage(named: UserDataService.instance.avatarName)            
             userImage.backgroundColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
         } else {
             loginBtn.setTitle("Login", for: .normal)
