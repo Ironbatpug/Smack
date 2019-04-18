@@ -152,6 +152,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8b-aq-tGm">
+                                <rect key="frame" x="8" y="623" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -163,9 +169,11 @@
                             <constraint firstItem="Bxi-kN-ASv" firstAttribute="top" secondItem="9dK-1z-uPl" secondAttribute="bottom" constant="30" id="d8O-fx-Aaw"/>
                             <constraint firstItem="7si-6w-pGd" firstAttribute="top" secondItem="Up1-bp-0H1" secondAttribute="bottom" id="fYD-LR-NJj"/>
                             <constraint firstAttribute="trailing" secondItem="Bxi-kN-ASv" secondAttribute="trailing" id="hKh-Sh-phw"/>
+                            <constraint firstItem="Bxi-kN-ASv" firstAttribute="top" secondItem="f8b-aq-tGm" secondAttribute="bottom" constant="4" id="kn1-hU-fjv"/>
                             <constraint firstItem="9dK-1z-uPl" firstAttribute="top" secondItem="7si-6w-pGd" secondAttribute="bottom" id="lek-Pf-zy0"/>
                             <constraint firstAttribute="trailing" secondItem="7si-6w-pGd" secondAttribute="trailing" id="qG9-Pj-E1I"/>
                             <constraint firstItem="9dK-1z-uPl" firstAttribute="leading" secondItem="GY7-Nh-Ipu" secondAttribute="leading" id="sKj-k6-SFh"/>
+                            <constraint firstItem="f8b-aq-tGm" firstAttribute="leading" secondItem="GY7-Nh-Ipu" secondAttribute="leading" constant="8" id="t0O-KU-hf8"/>
                             <constraint firstItem="wFX-dJ-nSO" firstAttribute="top" secondItem="Bxi-kN-ASv" secondAttribute="bottom" id="zvz-SG-wwn"/>
                         </constraints>
                     </view>
@@ -175,6 +183,7 @@
                         <outlet property="messageTxtBox" destination="Bxi-kN-ASv" id="jYi-nD-esq"/>
                         <outlet property="sendBtn" destination="ceS-KR-TCv" id="USJ-3u-SPb"/>
                         <outlet property="tableView" destination="9dK-1z-uPl" id="lWF-EU-dDl"/>
+                        <outlet property="tipingUserLbl" destination="f8b-aq-tGm" id="gKN-oX-gxB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYA-K5-9M7" userLabel="First Responder" sceneMemberID="firstResponder"/>

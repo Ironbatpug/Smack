@@ -15,6 +15,8 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var channelNameLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTxtBox: UITextField!
+    @IBOutlet weak var tipingUserLbl: UILabel!
+    
     
     var tiping = false
     
@@ -45,6 +47,33 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     let endIndex = IndexPath(row: MessageService.instance.messages.count-1, section: 0)
                     self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
                 }
+            }
+        }
+        
+        SocketService.instance.getTipingUsers { (typingUsers) in
+            guard let channelId = MessageService.instance.selectedChannel?.channelID else {return}
+            var names = ""
+            var numberOfTypers = 0
+            
+            for (typingUser, channel) in typingUsers {
+                if  typingUser != UserDataService.instance.name && channel == channelId {
+                    if names == "" {
+                        names = typingUser
+                    } else {
+                        names = "\(names), \(typingUser)"
+                    }
+                    numberOfTypers += 1
+                }
+            }
+            
+            if numberOfTypers > 0 && AuthService.instance.isLoggedIn == true {
+                var verb = "is"
+                if numberOfTypers > 1 {
+                    verb = "are"
+                }
+                self.tipingUserLbl.text = "\(names) \(verb) is typing a message"
+            } else {
+                self.tipingUserLbl.text = ""
             }
         }
         
@@ -80,12 +109,15 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func messageBoxEditing(_ sender: Any) {
+        guard let channeldId = MessageService.instance.selectedChannel?.channelID else {return}
         if messageTxtBox.text == "" {
             tiping = false
             sendBtn.isHidden = false
+            SocketService.instance.socket.emit("stopType", UserDataService.instance.name, channeldId)
         } else {
             if tiping == false {
                 sendBtn.isHidden = false
+                SocketService.instance.socket.emit("startType", UserDataService.instance.name, channeldId)
             }
             tiping = true
         }
@@ -101,6 +133,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if succes {
                     self.messageTxtBox.text = ""
                     self.messageTxtBox.resignFirstResponder()
+                    SocketService.instance.socket.emit("stopType", UserDataService.instance.name, channelid)
                 }
             }
         }
